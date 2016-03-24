@@ -50,6 +50,7 @@ module Test.Hspec.Expectations (
 ) where
 
 import qualified Test.HUnit
+import           Test.HUnit ((@?=))
 import           Control.Exception
 import           Data.Typeable
 import           Data.List
@@ -85,7 +86,7 @@ infix 1 `shouldNotBe`, `shouldNotSatisfy`, `shouldNotContain`, `shouldNotReturn`
 -- @actual \`shouldBe\` expected@ sets the expectation that @actual@ is equal
 -- to @expected@.
 with_loc(shouldBe, (Show a, Eq a) => a -> a -> Expectation)
-actual `shouldBe` expected = expectTrue ("expected: " ++ show expected ++ "\n but got: " ++ show actual) (actual == expected)
+actual `shouldBe` expected = actual @?= expected
 
 -- |
 -- @v \`shouldSatisfy\` p@ sets the expectation that @p v@ is @True@.
